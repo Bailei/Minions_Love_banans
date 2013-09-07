@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+<head>
+	<style>
+		#p3{font:40px red; text-align:center; font-family: Times;}
+
+	</style>
+	<title>Minions Love Bananan</title>
+	<script src = http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.js></script>
+	<style>
+		body{
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-image: url('blackimage.jpg');
+/*			overflow:scroll;*/
+		}
+		#top{
+			position: absolute;
+			border-style: solid;
+			border-width: 0px;
+			border-color: #00BFFF;
+			margin: auto;
+			width: 90.5%;
+			height: 150px;
+			top: 10px;
+			left: 80px;
+			overflow: scroll;
+		}
+		#top_left{
+			border-style: solid;
+			border-width: 0px;
+			border-color: #00BFFF;
+			width:100%;
+			font-size: 160%;
+			font-family: "Times New Roman",Georgia,Serif; 
+			color: #00BFFF;
+		}
+		#game{
+			position: absolute;
+			margin: auto;
+			width: 90%;
+			height: 700px;
+			left:80px;
+			border-style: solid;
+			border-color: #00BFFF;
+			border-width: 0px;
+			top: 166px;
+		}
+		#game_block{
+			position: absolute;
+			margin: auto;
+			top: 2px;
+			bottom: 2px;
+			left: 21%;
+			right: 2px;
+			border-style: solid;
+			border-color: #00BFFF;
+			border-width: 5px;
+		}
+		#innerfield{
+			position: absolute;
+			border:solid 0px #00BFFF;
+			top: 5%;
+			left: 5%;
+			right: 5%;
+			bottom: 5%;
+		}
+		#game_info{
+			position: absolute;
+			margin: auto;
+			top: 2px;
+			bottom: 2px;
+			width: 20%;
+			left: 2px;
+			border-color: #00BFFF;
+			border-width: 0px;
+			border-style: solid;
+		}
+		#input{
+			position: absolute;
+			border-color: #00BFFF;
+			border-width: 0px;
+			border-style: solid;			
+			top: 2px;
+			height:30%;
+			width:95%;
+			left:1%;
+		}
+		#control{
+			position: absolute;
+			border: solid 5px #00BFFF;
+			top: 32.5%;
+			bottom: 2px;
+			width: 95%;
+			left: 1%;
+		}
+		.bananas{
+			width : 60px; 
+			height: 60px;
+			position: absolute;
+			display: inline-block;
+		}
+		#game_button{
+			position: absolute;
+			border:solid 0px #00BFFF;
+			top:5px;
+			width:83%;
+			left:9%;
+		}
+		#score{
+			position: absolute;
+			border:solid 0px #00BFFF;
+			top:28%;
+			width:98%;
+			height:40%;
+		}
+		#clicknum{
+			position: absolute;
+			border:solid 0px #00BFFF;
+			top: 10%;
+			width:33%;
+			height:20%;
+			left: 33%;
+			right:33%;
+			font-size: 160%;
+			font-family: "Times New Roman",Georgia,Serif; 
+			color: #00BFFF;
+		}
+		#hints{
+			position: absolute;
+			border:solid 0px #00BFFF;
+			bottom:0%;
+			right:0%;
+			width:20%;
+		}
+		#social{
+			position:absolute;
+			border:solid 0px #00BFFF;
+			top:140px;
+			right:-40px;
+			width:15%;
+			height: 25px;
+		}
+		#facebook{
+			position:absolute;
+			border:solid 0px #00BFFF;
+			top:105px;
+			right:220px;
+			width:4%;
+			height: 60px;	
+		}
+	</style>
+
+	<script type="text/javascript">
+	function hints(){
+		$('#btn3').on('click', function(){
+			if(totalclick === 0 && win === 0){
+				$("#bananas_1").animate({opacity:"1"},"100").animate({opacity:"0"},"100");
+				$("#bananas_2").animate({opacity:"1"},"100").animate({opacity:"0"},"100");
+				$("#bananas_3").animate({opacity:"1"},"100").animate({opacity:"0"},"100");
+			}else if(totalclick === 1 && win === 10){
+				$("#bananas_2").animate({opacity:"1"},"100").animate({opacity:"0"},"100");
+				$("#bananas_3").animate({opacity:"1"},"100").animate({opacity:"0"},"100");				
+			}else if(totalclick === 2 && win === 100){
+				$("#bananas_3").animate({opacity:"1"},"100").animate({opacity:"0"},"100");
+			}
+		});
+	};
+	</script>
+
+	<script type="text/javascript">
+
+	function start(){
+		var x1 = Math.floor(Math.random()*$("#innerfield").width());
+        var y1 = Math.floor(Math.random()*$("#innerfield").height());
+		var x2 = Math.floor(Math.random()*$("#innerfield").width());
+        var y2 = Math.floor(Math.random()*$("#innerfield").height());
+		var x3 = Math.floor(Math.random()*$("#innerfield").width());
+        var y3 = Math.floor(Math.random()*$("#innerfield").height());
+		
+		$("#bananas_1").animate({opacity:"1"},"fast").css({
+			"margin-left": x1,
+			"margin-top": y1
+		}).animate({opacity:"0.5"},"fast").animate({opacity:"0"},"fast");
+
+		$("#bananas_2").animate({opacity:"1"},"fast").css({
+			"margin-left": x2,
+			"margin-top": y2
+		}).animate({opacity:"0.5"},"fast").animate({opacity:"0"},"fast");
+
+		$("#bananas_3").animate({opacity:"1"},"fast").css({
+			"margin-left": x3,
+			"margin-top": y3
+		}).animate({opacity:"0.5"},"fast").animate({opacity:"0"},"fast");		
+	}
+
+	function clickbanana(){
+		totalclick = 0;
+		win = 0;		
+		$("#bananas_1").on('click', function(){
+			$("#bananas_1").animate({opacity:'1'});
+			totalclick = 1;
+			win = 10;
+		});
+		$("#bananas_2").on('click', function(){
+			if(totalclick === 1 && win === 10){
+				$("#bananas_2").animate({opacity:'1'});
+				totalclick = 2;
+				win = 100;
+			}else if(totalclick !== 1 && win !== 10 && totalclick !== 2 && win !== 100){
+				$("#p3").show().html("You should find the No.1 Banana first!");
+			};
+		});
+		$("#bananas_3").on('click', function(){
+			if(totalclick === 2 && win === 100){
+				$("#bananas_3").animate({opacity:'1'});
+				totalclick = 3;
+				win = 1000;
+			}else if(totalclick === 1 && win === 10){
+				$("#p3").show().html("You should find the No.2 Banana first!");
+			}else if(totalclick !== 1 && win !== 10 && totalclick !== 3 && win !== 1000){
+				$("#p3").show().html("You should find the No.1 Banana first!");
+			};
+		});
+	};
+
+	function clickcomplete(){
+		$('#btn2').click(function(){
+			if(totalclick === 3 && win === 1000){
+				$("#p3").show().html("You win!");
+			}else{
+				$("#p3").show().html("You lose!");
+			};
+		});	
+	};
+
+	// function validata()
+ //    {
+ //      	var a=document.getElementById("Hidden1").value++;
+ //       	$('#p3').show.html("a");
+ //   	};
+
+	$(function(){
+		$("#btn1").click(function(){
+			var totalclick = 0;
+			var win = 0;
+			$("#p3").hide();
+			start();
+			clickbanana();
+			clickcomplete();
+		});
+		hints();
+		validata();
+	});
+</script>
+</head>
+
+<body>	
+	<table id = "top">
+		<tbody>
+			<tr>
+				<td id = "top_left" align = "center">
+					<h1>
+						Minions Love Banana
+					</h1>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div id = "game">
+<!-- 		<input id="Hidden1" type="hidden" value="1" style="width:100%; height:100%;"/> -->
+		<div id = "game_info">
+			<div id="input">
+				<img src="headImage.jpg" width = "103%" height = "102%">
+			</div>
+			<div id="control">
+				<div id = "game_button">
+					<button type = "button" id = "btn1">Play</button>
+					<button type = "button" id = "btn2">Win or Lose</button>
+					<button type = "button" onclick="location.reload();">Refresh</button>
+				</div>
+<!-- 				<div id="clicknum">
+					<h1 align = "center">10</h1>
+				</div> -->
+				<div id = "score">
+					<p id = "p3" style="color:red" style="font-size:30px"></p>
+				</div>
+				<div id = "hints">
+					<button type = "button" id = "btn3">Hints</button>
+				</div>
+			</div>
+		</div>
+	
+		<div id="game_block">
+			<div id="innerfield">
+				<img id="bananas_1"  class="bananas" src = "1.png" alt = "banana">
+				<img id="bananas_2"  class="bananas" src = "2.png" alt = "banana">
+				<img id="bananas_3"  class="bananas" src = "3.png" alt = "banana">
+				<img id="bananas_0"  class="bananas" src = "bananas.png" alt = "banana">
+			</div>
+		</div>
+	</div>
+</body>
+</html>
